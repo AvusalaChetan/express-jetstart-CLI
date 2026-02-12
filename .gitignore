@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Compiled output
+dist/
+
+# Config files
+Ar.yaml
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

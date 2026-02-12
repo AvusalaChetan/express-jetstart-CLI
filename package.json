@@ -1,0 +1,52 @@
+{
+  "name": "express-kickstart",
+  "version": "1.0.0",
+  "description": "A powerful CLI to scaffold Express applications in seconds",
+  "main": "./dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc && node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "bin": {
+    "express-kickstart": "./dist/index.js"
+  },
+  "keywords": [
+    "express",
+    "cli",
+    "generator",
+    "scaffold",
+    "boilerplate",
+    "typescript",
+    "nodejs"
+  ],
+  "author": "Chetan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chetan/express-kickstart"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "chalk-animation": "^2.0.3",
+    "figlet": "^1.10.0",
+    "gradient-string": "^3.0.0",
+    "inquirer": "^13.2.2",
+    "nanospinner": "^1.2.2",
+    "node-emoji": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/chalk-animation": "^1.6.3",
+    "@types/figlet": "^1.7.0",
+    "@types/inquirer": "^9.0.9",
+    "@types/node": "^25.2.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "files": [
+    "dist"
+  ]
+}
