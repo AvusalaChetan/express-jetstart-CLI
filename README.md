@@ -7,7 +7,6 @@ A powerful command-line tool that scaffolds production-ready Express application
 Setting up a new Express project shouldn't take hours. This CLI eliminates repetitive boilerplate work and gets you coding faster.
 
 **What you get:**
-
 - Zero manual configuration — everything's ready out of the box
 - Modern project structure with best practices baked in
 - Choose your stack: JavaScript or TypeScript, ESM or CommonJS
@@ -27,18 +26,20 @@ Setting up a new Express project shouldn't take hours. This CLI eliminates repet
 
 ---
 
-## Quick Start
+## Installation & Usage
 
+**Just use npx (recommended):**
 ```bash
-npm run express-jetstart
+npx express-jetstart
 ```
+
+> **Note:** Do not run `npm install -g express-jetstart`. Just use `npx` to scaffold your project. Installing globally is not required and may cause dependency issues.
 
 Follow the interactive prompts to customize your project, and you're ready to code!
 
 ---
 
 ## What Gets Generated
-
 ```
 your-project/
 ├── src/
@@ -60,7 +61,11 @@ your-project/
 
 Have ideas to make this better? Contributions, feature requests, and feedback are always welcome!
 
+- 🐛 [Report issues](https://github.com/your-username/express-jetstart/issues)
+- 💡 [Suggest features](https://github.com/your-username/express-jetstart/issues)
+- ⭐ [Star on GitHub](https://github.com/your-username/express-jetstart)
+
 ---
 
 **Built with ❤️ by Chetan**  
-_Helping developers code faster, one CLI at a time._
+*Helping developers code faster, one CLI at a time.*
