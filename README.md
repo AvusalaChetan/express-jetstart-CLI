@@ -1,4 +1,4 @@
-# Express KickStart CLI ⚡
+# express-jetstart CLI ⚡
 
 A powerful command-line tool that scaffolds production-ready Express applications in seconds — so you can skip the setup and start building.
 
@@ -7,6 +7,7 @@ A powerful command-line tool that scaffolds production-ready Express application
 Setting up a new Express project shouldn't take hours. This CLI eliminates repetitive boilerplate work and gets you coding faster.
 
 **What you get:**
+
 - Zero manual configuration — everything's ready out of the box
 - Modern project structure with best practices baked in
 - Choose your stack: JavaScript or TypeScript, ESM or CommonJS
@@ -27,8 +28,9 @@ Setting up a new Express project shouldn't take hours. This CLI eliminates repet
 ---
 
 ## Quick Start
+
 ```bash
-npm run express-kickstart
+npm run express-jetstart
 ```
 
 Follow the interactive prompts to customize your project, and you're ready to code!
@@ -36,6 +38,7 @@ Follow the interactive prompts to customize your project, and you're ready to co
 ---
 
 ## What Gets Generated
+
 ```
 your-project/
 ├── src/
@@ -60,4 +63,4 @@ Have ideas to make this better? Contributions, feature requests, and feedback ar
 ---
 
 **Built with ❤️ by Chetan**  
-*Helping developers code faster, one CLI at a time.*
+_Helping developers code faster, one CLI at a time._

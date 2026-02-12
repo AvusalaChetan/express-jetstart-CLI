@@ -5,7 +5,7 @@ import * as emoji from "node-emoji";
 import type {Answers} from "../prompts/questions.js";
 import gradient from "gradient-string";
 
-const text: string = "Express kickstart";
+const text: string = "Express jetstart";
 
 const showBanner = () => {
   const banner = figlet.textSync(text, {
