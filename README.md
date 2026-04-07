@@ -1,46 +1,36 @@
-# express-jetstart CLI ⚡
+# express-jetstart CLI
 
-A powerful command-line tool that scaffolds production-ready Express applications in seconds — so you can skip the setup and start building.
+A fast CLI to scaffold production-ready Express apps in seconds.
 
-## Why This Tool?
+## Quick Start
 
-Setting up a new Express project shouldn't take hours. This CLI eliminates repetitive boilerplate work and gets you coding faster.
+```bash
+npx express-jetstart@latest
+```
 
-**What you get:**
-- Zero manual configuration — everything's ready out of the box
-- Modern project structure with best practices baked in
-- Choose your stack: JavaScript or TypeScript, ESM or CommonJS
-- Pre-configured essentials: routes, controllers, middleware, and more
 
-**Stop wasting time on setup. Start building features immediately.**
+If this command shows an older cached version on your machine, use `@latest`.
 
----
+## Preview
+![expressjet](./assets/expressjet.png)
+
+(./assets/express-jetstart-preview.png)
+
+Place the screenshot you shared at:
+
+`assets/express-jetstart-preview.png`
 
 ## Features
 
-✨ **Instant scaffolding** — Generate a complete Express app with one command  
-📦 **Flexible setup** — JavaScript or TypeScript, ESM or CommonJS  
-🗂️ **Clean structure** — Organized folders for controllers, routes, models, and public assets  
-🔧 **Ready-to-use files** — server, .env, .gitignore, README, and more pre-configured  
-🚀 **Production-ready** — Built with best practices from day one
+- Instant Express project scaffolding
+- JavaScript or TypeScript setup
+- ESM or CommonJS options
+- Clean folder structure with starter files
+- Ready-to-run project output
 
----
+## Generated Structure
 
-## Installation & Usage
-
-**Just use npx (recommended):**
-```bash
-npx express-jetstart
-```
-
-> **Note:** Do not run `npm install -g express-jetstart`. Just use `npx` to scaffold your project. Installing globally is not required and may cause dependency issues.
-
-Follow the interactive prompts to customize your project, and you're ready to code!
-
----
-
-## What Gets Generated
-```
+```text
 your-project/
 ├── src/
 │   ├── controllers/
@@ -50,22 +40,26 @@ your-project/
 ├── public/
 ├── .env
 ├── .gitignore
-├── server.js (or .ts)
+├── server.js (or server.ts)
 ├── package.json
 └── README.md
 ```
 
----
+## Development
+
+```bash
+npm install
+npm run build
+npm run dev
+```
 
 ## Contributing
 
-Have ideas to make this better? Contributions, feature requests, and feedback are always welcome!
+Issues and PRs are welcome.
 
-- 🐛 [Report issues](https://github.com/your-username/express-jetstart/issues)
-- 💡 [Suggest features](https://github.com/your-username/express-jetstart/issues)
-- ⭐ [Star on GitHub](https://github.com/your-username/express-jetstart)
+- Report issues: https://github.com/AvusalaChetan/express-jetstart-CLI/issues
+- Repository: https://github.com/AvusalaChetan/express-jetstart-CLI
 
----
+## License
 
-**Built with ❤️ by Chetan**  
-*Helping developers code faster, one CLI at a time.*
+MIT
