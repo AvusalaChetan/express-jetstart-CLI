@@ -1,6 +1,6 @@
 {
   "name": "express-jetstart",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A powerful CLI to scaffold Express applications in seconds",
   "main": "./dist/index.js",
   "type": "module",
