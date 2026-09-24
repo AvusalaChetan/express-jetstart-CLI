@@ -39,7 +39,7 @@ export const features = (): void => {
       margin: 1,
       borderStyle: "round",
       borderColor: "#36D1DC",
-      float: "center",
+      float: "left",
       title: chalk.white.bold("Features"),
     }),
   );

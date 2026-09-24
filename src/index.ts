@@ -8,7 +8,8 @@ import sleep from "./utils/sleep.js";
 
 const main = async () => {
   try {
-    console.clear();
+     console.clear();
+    console.log('\n')
     await BuildUi();
     const answers = await askQuestions();
 
