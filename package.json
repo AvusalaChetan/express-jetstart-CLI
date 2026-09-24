@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "boxen": "^8.0.1",
+    "cfonts": "^3.3.1",
     "chalk": "^5.6.2",
     "chalk-animation": "^2.0.3",
     "figlet": "^1.10.0",

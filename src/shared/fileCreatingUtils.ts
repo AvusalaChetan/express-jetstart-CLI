@@ -44,22 +44,15 @@ const folders: string[] = [
 
 const createFolders = (projectName: string, spinner: Spinner) => {
   try {
+    fs.mkdirSync(`${projectName}/src`, {recursive: true});
+
     folders.forEach((folder) => {
-      fs.mkdirSync(`${projectName}/${folder}`);
-      fs.writeFileSync(`${projectName}/${folder}/.gitkeep`, "");
+      fs.mkdirSync(`${projectName}/src/${folder}`, {recursive: true});
     });
+
     spinner.success({
       text: chalk.green(`Project "${projectName}" created successfully!\n`),
     });
-    console.log(chalk.cyan.bold("🚀 Next steps:\n"));
-    console.log(
-      chalk.blue("   1. ") +
-        chalk.white.bold("cd ") +
-        chalk.yellow.bold(projectName),
-    );
-    console.log(chalk.blue("   2. ") + chalk.white.bold("npm install"));
-    console.log(chalk.blue("   3. ") + chalk.white.bold("npm run dev "));
-    console.log(chalk.gray("Happy coding!\n"));
   } catch (error) {
     spinner.error({
       text: chalk.red(`Failed to create project "${projectName}".`),
@@ -67,15 +60,20 @@ const createFolders = (projectName: string, spinner: Spinner) => {
   }
 };
 
-const createRootFiles = (
-  projectName: string,
-  language: Answers["language"],
-  spinner: Spinner,
-  framework: Answers["framework"],
-  needViews: Answers["needViews"],
-  views: Answers["views"],
-  mjsMode: Answers["mjsMode"],
-) => {
+// ------------------------------------------------------------------------
+type CreateRootFilesParams = {
+  projectName: string;
+  language: Answers["language"];
+  framework: Answers["framework"];
+  needViews: Answers["needViews"];
+  views: Answers["views"];
+  mjsMode: Answers["mjsMode"];
+};
+const createRootFiles = ({
+  projectName,
+  language,
+  mjsMode,
+}: CreateRootFilesParams) => {
   const rootFiles: rootFilesType[] = [
     {
       file: language === "javascript" ? "server.js" : "server.ts",
@@ -93,7 +91,7 @@ const createRootFiles = (
           ? mjsMode === "esm"
             ? esmImport.slice(0, -1).join("\n") + appJsTemplate
             : commanjsImport.slice(0, -1).join("\n") + appJsTemplate
-          : ((tsImport.slice(0,-1).join("\n") + appTs) as string),
+          : ((tsImport.slice(0, -1).join("\n") + appTs) as string),
     },
 
     {
