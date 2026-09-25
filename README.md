@@ -1,6 +1,14 @@
 # express-jetstart CLI
 
-A fast CLI to scaffold production-ready Express apps in seconds.
+A fast CLI for scaffolding production-ready Express applications with a clean starting structure.
+
+## Why use it?
+
+- Generate an Express app in seconds
+- Choose JavaScript or TypeScript
+- Pick ESM or CommonJS
+- Start with a sensible folder structure
+- Skip repetitive boilerplate setup
 
 ## Quick Start
 
@@ -8,27 +16,18 @@ A fast CLI to scaffold production-ready Express apps in seconds.
 npx express-jetstart@latest
 ```
 
-
-If this command shows an older cached version on your machine, use `@latest`.
-
-## Preview
-![expressjet](./assets/expressjet.png)
-
-(./assets/express-jetstart-preview.png)
-
-Place the screenshot you shared at:
-
-`assets/express-jetstart-preview.png`
+If your machine is using a cached older version, make sure to include `@latest`.
 
 ## Features
 
-- Instant Express project scaffolding
-- JavaScript or TypeScript setup
-- ESM or CommonJS options
-- Clean folder structure with starter files
-- Ready-to-run project output
+- Instant project scaffolding
+- TypeScript and JavaScript templates
+- ESM and CommonJS module support
+- Prebuilt folder layout for app structure
+- Ready-to-run Express starter files
+- Clean project output for fast iteration
 
-## Generated Structure
+## Generated Project Structure
 
 ```text
 your-project/
@@ -36,16 +35,23 @@ your-project/
 │   ├── controllers/
 │   ├── routes/
 │   ├── models/
-│   └── middleware/
+│   ├── middlewares/
+│   ├── utils/
+│   ├── config/
+│   └── services/
 ├── public/
 ├── .env
+├── .env.example
 ├── .gitignore
-├── server.js (or server.ts)
+├── server.js or server.ts
+├── app.js or app.ts
 ├── package.json
-└── README.md
+├── README.md
+├── tsconfig.json
+└── ARCHITECTURE.yaml
 ```
 
-## Development
+## Local Development
 
 ```bash
 npm install
@@ -55,7 +61,7 @@ npm run dev
 
 ## Contributing
 
-Issues and PRs are welcome.
+Contributions are welcome.
 
 - Report issues: https://github.com/AvusalaChetan/express-jetstart-CLI/issues
 - Repository: https://github.com/AvusalaChetan/express-jetstart-CLI
