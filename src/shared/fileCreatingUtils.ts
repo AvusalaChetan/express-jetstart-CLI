@@ -2,12 +2,12 @@ import chalk from "chalk";
 import fs from "fs";
 import type {Answers} from "inquirer";
 import {type Spinner} from "nanospinner";
-import {templatePath} from "../create.js";
 import {
   env,
   envExample,
   eslint,
   gitignore,
+  readmeTemplate,
 } from "../templates/dotFileTemplets.js";
 import {
   commanjsImport,
@@ -122,13 +122,7 @@ const createRootFiles = ({
     {file: ".gitignore", data: () => gitignore},
     {
       file: "README.md",
-      data: () => {
-        try {
-          return fs.readFileSync(`${templatePath}/README.md`, "utf-8");
-        } catch (err) {
-          return "# Project\n\nThis is your Express app. Customize this README as needed.";
-        }
-      },
+      data: () => readmeTemplate.replace(/{{project-name}}/g, projectName),
     },
     {
       file: "ARCHITECTURE.yaml",
