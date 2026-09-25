@@ -84,15 +84,15 @@ const askQuestions = async (): Promise<Answers> => {
       message: gradient("#f7971e", "#ffd200")(`🖌️  Choose your view engine:`),
       choices: [
         {
-          name: `${emoji.get("diamond")}  EJS  ${chalk.gray("(simple & flexible)")}`,
+          name: `${emoji.get("gem")}  EJS  ${chalk.gray("(simple & flexible)")}`,
           value: "ejs",
         },
         {
-          name: `${emoji.get("diamond")}  Pug  ${chalk.gray("(clean & concise)")}`,
+          name: `${emoji.get("gem")}  Pug  ${chalk.gray("(clean & concise)")}`,
           value: "pug",
         },
         {
-          name: `${emoji.get("diamond")}  Handlebars  ${chalk.gray("(powerful & popular)")}`,
+          name: `${emoji.get("gem")}  Handlebars  ${chalk.gray("(powerful & popular)")}`,
           value: "handlebars",
         },
       ],
