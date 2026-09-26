@@ -7,11 +7,11 @@ export interface Answers {
   projectName: string;
   framework: "express" | "fastify" | "hono";
   language: "typescript" | "javascript";
-  views: ("ejs" | "pug" | "handlebars")[] | undefined;
+  views?: "ejs" | "pug" | "handlebars";
   needViews: boolean;
-  mjsMode: "esm" | "cjs";
-  cors: boolean;
-  envConfig: boolean;
+  mjsMode?: "esm" | "cjs";
+  cors?: boolean;
+  envConfig?: boolean;
 }
 
 const askQuestions = async (): Promise<Answers> => {

@@ -77,8 +77,8 @@ type CreateRootFilesParams = {
   language: Answers["language"];
   framework: Answers["framework"];
   needViews: Answers["needViews"];
-  views: Answers["views"];
-  mjsMode: Answers["mjsMode"];
+  views?: Answers["views"];
+  mjsMode?: Answers["mjsMode"];
 };
 
 const getViewEngineInfo = (views: Answers["views"]) => {
