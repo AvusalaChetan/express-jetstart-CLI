@@ -10,18 +10,18 @@ import {
   readmeTemplate,
 } from "../templates/dotFileTemplets.js";
 import {
-  commanjsImport,
-  esmImport,
+  appCjsTemplate,
   appJsTemplate,
   packageJsonTemplateCJS,
   packageJsonTemplateESM,
-  serverTsTemplate,
+  serverCjsTemplate,
+  serverJsTemplate,
 } from "../templates/express/jsTemplates/jsTemplets.js";
 
 import {
   appts as appTs,
   packageJsonTemplateTS,
-  serverJsTemplate,
+  serverJsTemplate as serverTsTemplate,
   tsConfigTemplate,
   tsImport,
 } from "../templates/express/TsTemplates/tsTemplates.js";
@@ -102,20 +102,25 @@ const createRootFiles = ({
   const getAppContent = () => {
     let appContent = "";
     if (language === "javascript") {
-      appContent =
-        mjsMode === "esm"
-          ? esmImport.slice(0, -1).join("\n") + appJsTemplate
-          : commanjsImport.slice(0, -1).join("\n") + appJsTemplate;
+      appContent = mjsMode === "esm" ? appJsTemplate : appCjsTemplate;
     } else {
       appContent = (tsImport.slice(0, -1).join("\n") + appTs) as string;
     }
 
     if (needViews && viewInfo) {
-      const viewConfig = `\nimport path from "path";\napp.set("views", path.join(process.cwd(), "src", "views"));\napp.set("view engine", "${viewInfo.ext}");\n`;
-      appContent = appContent.replace(
-        /export const app = express\(\);/,
-        `export const app = express();${viewConfig}`,
-      );
+      if (language === "javascript" && mjsMode === "cjs") {
+        const viewConfig = `\nconst path = require("path");\napp.set("views", path.join(process.cwd(), "src", "views"));\napp.set("view engine", "${viewInfo.ext}");\n`;
+        appContent = appContent.replace(
+          /const app = express\(\);/,
+          `const app = express();${viewConfig}`,
+        );
+      } else {
+        const viewConfig = `\nimport path from "path";\napp.set("views", path.join(process.cwd(), "src", "views"));\napp.set("view engine", "${viewInfo.ext}");\n`;
+        appContent = appContent.replace(
+          /export const app = express\(\);/,
+          `export const app = express();${viewConfig}`,
+        );
+      }
       appContent = appContent.replace(
         /app\.get\("\/",[\s\S]*?\n\}\);/,
         `app.get("/", (req: any, res: any) => {\n  res.render("index", { title: "${projectName}", projectName: "${projectName}" });\n});`,
@@ -153,8 +158,8 @@ const createRootFiles = ({
       data: () =>
         language === "javascript"
           ? mjsMode === "esm"
-            ? esmImport.slice(0, -1).join("\n") + serverJsTemplate
-            : commanjsImport.slice(0, -1).join("\n") + serverJsTemplate
+            ? serverJsTemplate
+            : serverCjsTemplate
           : serverTsTemplate,
     },
     {
