@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import fs from "fs";
-import type {Answers} from "inquirer";
+import type {Answers} from "../prompts/questions.js";
 import {type Spinner} from "nanospinner";
 import {
   env,
@@ -118,7 +118,7 @@ const createRootFiles = ({
       );
       appContent = appContent.replace(
         /app\.get\("\/",[\s\S]*?\n\}\);/,
-        `app.get("/", (req: any, res: any) => {\n  res.render("index", { title: "${projectName}", projectName: "${projectName}" });\n});`,
+        `app.get("/", (req, res) => {\n  res.render("index", { title: "${projectName}", projectName: "${projectName}" });\n});`,
       );
     }
     return appContent;
