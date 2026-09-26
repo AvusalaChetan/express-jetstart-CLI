@@ -13,9 +13,12 @@ JWT_SECRET=
 const gitignore: string = `
 # Dependencies
 node_modules/
+.pnp
+.pnp.js
 
 # Compiled output
 dist/
+build/
 
 # TypeScript
 *.tsbuildinfo
@@ -23,6 +26,19 @@ dist/
 # Environment variables
 .env
 .env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# Testing & Coverage
+coverage/
+
+# IDE & Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
 
 # OS files
 .DS_Store
@@ -31,6 +47,10 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 `;
 
 const eslint: string = `{

@@ -9,6 +9,7 @@ export interface Answers {
   language: "typescript" | "javascript";
   views?: "ejs" | "pug" | "handlebars";
   needViews: boolean;
+  initGit?: boolean;
   mjsMode?: "esm" | "cjs";
   cors?: boolean;
   envConfig?: boolean;
@@ -99,6 +100,16 @@ const askQuestions = async (): Promise<Answers> => {
       when: (answers: Answers) => answers.needViews === true,
       pageSize: 6,
     },
+
+    {
+      type: "confirm",
+      name: "initGit",
+      message: gradient(
+        "#00c6ff",
+        "#0072ff",
+      )(`📦  Initialize a git repository?`),
+      default: true,
+    },
   ];
 
   const results = await inquirer.prompt(questions);
@@ -109,6 +120,7 @@ const askQuestions = async (): Promise<Answers> => {
     language: results.language,
     views: results.views,
     needViews: results.needViews,
+    initGit: results.initGit ?? true,
     mjsMode: results.mjsMode,
     cors: results.cors,
     envConfig: results.envConfig,
