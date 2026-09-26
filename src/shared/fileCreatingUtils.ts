@@ -178,14 +178,17 @@ const createRootFiles = ({
     },
     {
       file: ".prettierrc",
-      data: () => `
-                {
-                "semi": true,
-                "singleQuote": true,
-                "tabWidth": 2,
-                "trailingComma": "es5"
-                }
-                `,
+      data: () =>
+        JSON.stringify(
+          {
+            semi: true,
+            singleQuote: true,
+            tabWidth: 2,
+            trailingComma: "es5",
+          },
+          null,
+          2,
+        ) + "\n",
     },
     {file: ".eslintrc.json", data: () => eslint},
     {
