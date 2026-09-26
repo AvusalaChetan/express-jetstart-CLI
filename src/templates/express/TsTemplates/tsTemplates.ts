@@ -65,7 +65,6 @@ export const packageJsonTemplateTS: string = `
       "@types/node": "^20.14.9",
       "concurrently": "^8.2.2",
       "typescript": "^5.4.5",
-      "ts-node-dev": "^2.0.0",
       "@types/express": "^4.17.21",
       "@types/cors": "^2.8.17",
       "@types/morgan": "^1.9.9",
