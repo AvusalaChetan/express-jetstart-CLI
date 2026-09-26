@@ -32,6 +32,8 @@ app.listen(PORT, () => {
 
 export const appJsTemplate: string = `
 import express from "express";
+import cors from "cors";
+import morgan from "morgan";
 
 export const app = express();
 // ─── Middleware ───────────────────────────────────────────
