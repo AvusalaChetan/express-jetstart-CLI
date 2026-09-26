@@ -1,5 +1,5 @@
 const env = `
-PORT=8080
+PORT=3000
 DATABASE_URL=mongodb://localhost:27017/
 JWT_SECRET=your_jwt_secret
 `;
