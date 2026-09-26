@@ -62,6 +62,7 @@ export const packageJsonTemplateTS: string = `
       "morgan": "^1.10.0"
     },
     "devDependencies": {
+      "@types/node": "^20.14.9",
       "concurrently": "^8.2.2",
       "typescript": "^5.4.5",
       "ts-node-dev": "^2.0.0",
