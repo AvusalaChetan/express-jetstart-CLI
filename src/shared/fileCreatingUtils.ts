@@ -116,9 +116,13 @@ const createRootFiles = ({
         /export const app = express\(\);/,
         `export const app = express();${viewConfig}`,
       );
+      const routeHandler =
+        language === "typescript"
+          ? `(req: Request, res: Response)`
+          : `(req, res)`;
       appContent = appContent.replace(
         /app\.get\("\/",[\s\S]*?\n\}\);/,
-        `app.get("/", (req, res) => {\n  res.render("index", { title: "${projectName}", projectName: "${projectName}" });\n});`,
+        `app.get("/", ${routeHandler} => {\n  res.render("index", { title: "${projectName}", projectName: "${projectName}" });\n});`,
       );
     }
     return appContent;
