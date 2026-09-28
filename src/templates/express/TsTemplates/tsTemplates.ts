@@ -74,16 +74,17 @@ export const packageJsonTemplateTS: string = `
 `;
 
 export const tsConfigTemplate: string = `{
-"compilerOptions": {
-"target": "ES2021",
-"module": "ESNext",
-"moduleResolution": "Node",
-"outDir": "dist",
-"rootDir": ".",
-"strict": true,
-"esModuleInterop": true,
-"skipLibCheck": true
-},
-"include": ["./**/*.ts"],
-"exclude": ["node_modules", "dist"]
-}`;
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "outDir": "dist",
+    "rootDir": ".",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
+`;

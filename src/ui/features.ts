@@ -18,7 +18,7 @@ const FEATURE_CONFIG: Feature[] = [
     desc: "Production-ready structure",
   },
   {icon: "lock", name: "Secure", desc: "Best practices built-in"},
-  {icon: "gear", name: "Customizable", desc: "Choose your stack  "},
+  {icon: "gear", name: "Customizable", desc: "Choose your stack"},
   {icon: "books", name: "Documented", desc: "Clear code comments"},
 ];
 
