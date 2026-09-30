@@ -7,6 +7,7 @@ export interface Answers {
   projectName: string;
   framework: "express" | "fastify" | "hono";
   language: "typescript" | "javascript";
+  templateType: "starter" | "minimal";
   views?: "ejs" | "pug" | "handlebars";
   needViews: boolean;
   initGit?: boolean;
@@ -65,7 +66,27 @@ const askQuestions = async (): Promise<Answers> => {
         },
       ],
       when: (answers: Answers) => answers.language !== "typescript",
+      pageSize: 6,
+    },
 
+    {
+      type: "rawlist",
+      name: "templateType",
+      message: gradient(
+        "#FF512F",
+        "#DD2476",
+      )(`📁  Select template structure:`),
+      choices: [
+        {
+          name: `${emoji.get("sparkles")}  Full Starter  ${chalk.gray("(includes sample routes, controller, middleware & utils)")}`,
+          value: "starter",
+        },
+        {
+          name: `${emoji.get("package")}  Minimal  ${chalk.gray("(clean boilerplate with empty folders)")}`,
+          value: "minimal",
+        },
+      ],
+      default: "starter",
       pageSize: 6,
     },
 
@@ -118,6 +139,7 @@ const askQuestions = async (): Promise<Answers> => {
     projectName: results.projectName,
     framework: "express",
     language: results.language,
+    templateType: results.templateType || "starter",
     views: results.views,
     needViews: results.needViews,
     initGit: results.initGit ?? true,
