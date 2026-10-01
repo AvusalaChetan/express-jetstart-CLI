@@ -3,10 +3,13 @@ import chalk from "chalk";
 import gradient from "gradient-string";
 import * as emoji from "node-emoji";
 
+export type Database = "mongodb" | "postgresql" | "mysql" | "none";
+
 export interface Answers {
   projectName: string;
   framework: "express" | "fastify" | "hono";
   language: "typescript" | "javascript";
+  database: Database;
   templateType: "starter" | "minimal";
   views?: "ejs" | "pug" | "handlebars";
   needViews: boolean;
@@ -43,7 +46,7 @@ const askQuestions = async (): Promise<Answers> => {
           name: `${emoji.get("star")}  TypeScript  ${chalk.gray("(recommended)")}`,
           value: "typescript",
         },
-        {name: `${emoji.get("zap")}  JavaScript`, value: "javascript"},
+        { name: `${emoji.get("zap")}  JavaScript`, value: "javascript" },
       ],
       pageSize: 6,
     },
@@ -71,6 +74,35 @@ const askQuestions = async (): Promise<Answers> => {
 
     {
       type: "rawlist",
+      name: "database",
+      message: gradient(
+        "#00F260",
+        "#0575E6",
+      )(`🗄️  Choose your database:`),
+      choices: [
+        {
+          name: `${emoji.get("leaf")}  MongoDB  ${chalk.gray("(Mongoose)")}`,
+          value: "mongodb",
+        },
+        {
+          name: `${emoji.get("elephant")}  PostgreSQL  ${chalk.gray("(pg)")}`,
+          value: "postgresql",
+        },
+        {
+          name: `${emoji.get("dolphin")}  MySQL  ${chalk.gray("(mysql2)")}`,
+          value: "mysql",
+        },
+        {
+          name: `${emoji.get("heavy_minus_sign")}  None`,
+          value: "none",
+        },
+      ],
+      default: "mongodb",
+      pageSize: 6,
+    },
+
+    {
+      type: "rawlist",
       name: "templateType",
       message: gradient(
         "#FF512F",
@@ -78,11 +110,11 @@ const askQuestions = async (): Promise<Answers> => {
       )(`📁  Select template structure:`),
       choices: [
         {
-          name: `${emoji.get("sparkles")}  Full Starter  ${chalk.gray("(includes sample routes, controller, middleware & utils)")}`,
+          name: `${emoji.get("sparkles")}  Full Starter  ${chalk.gray("(recommended: health routes, controller, middleware & utils)")}`,
           value: "starter",
         },
         {
-          name: `${emoji.get("package")}  Minimal  ${chalk.gray("(clean boilerplate with empty folders)")}`,
+          name: `${emoji.get("package")}  Minimal  ${chalk.gray("(clean boilerplate with basic app)")}`,
           value: "minimal",
         },
       ],
@@ -139,6 +171,7 @@ const askQuestions = async (): Promise<Answers> => {
     projectName: results.projectName,
     framework: "express",
     language: results.language,
+    database: results.database || "mongodb",
     templateType: results.templateType || "starter",
     views: results.views,
     needViews: results.needViews,

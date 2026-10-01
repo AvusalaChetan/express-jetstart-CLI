@@ -174,3 +174,23 @@ export const tsConfigTemplate: string = `{
   "exclude": ["node_modules", "dist"]
 }
 `;
+
+export const serverTsTemplateWithDB: string = `import dotenv from "dotenv";
+import { app } from "./app.js";
+import { connectDB } from "./src/config/db.js";
+
+dotenv.config();
+const PORT: number = process.env.PORT ? Number(process.env.PORT) : 3000;
+
+if (Number.isNaN(PORT)) throw new Error("PORT must be a valid number");
+
+// ─── Start Server & Connect Database ──────────────────────
+const startServer = async () => {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(\` Server running on http://localhost:\${PORT}\`);
+  });
+};
+
+startServer();
+`;

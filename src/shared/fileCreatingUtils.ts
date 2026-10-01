@@ -1,11 +1,11 @@
 import chalk from "chalk";
 import fs from "fs";
-import type { Answers } from "../prompts/questions.js";
+import type { Answers, Database } from "../prompts/questions.js";
 import { type Spinner } from "nanospinner";
 import {
-  env,
-  envExample,
   eslint,
+  getEnvExampleTemplate,
+  getEnvTemplate,
   gitignore,
   readmeTemplate,
 } from "../templates/dotFileTemplets.js";
@@ -27,7 +27,9 @@ import {
   packageJsonTemplateCJS,
   packageJsonTemplateESM,
   serverCjsTemplate,
+  serverCjsTemplateWithDB,
   serverJsTemplate,
+  serverJsTemplateWithDB,
 } from "../templates/express/jsTemplates/jsTemplets.js";
 
 import {
@@ -39,9 +41,25 @@ import {
   healthRouteTemplateTS,
   packageJsonTemplateTS,
   serverTsTemplate,
+  serverTsTemplateWithDB,
   tsConfigTemplate,
   tsImport,
 } from "../templates/express/TsTemplates/tsTemplates.js";
+
+import {
+  dbMongoTemplateTS,
+  dbMysqlTemplateTS,
+  dbPgTemplateTS,
+} from "../templates/express/dbTemplates/dbConnectionTemplateTs.js";
+
+import {
+  dbMongoTemplateCJS,
+  dbMongoTemplateESM,
+  dbMysqlTemplateCJS,
+  dbMysqlTemplateESM,
+  dbPgTemplateCJS,
+  dbPgTemplateESM,
+} from "../templates/express/dbTemplates/dbConnectionTemplateJs.js";
 
 import {
   ejsTemplate,
@@ -97,10 +115,50 @@ const getViewEngineInfo = (views: Answers["views"]) => {
   return { engine, ext, depName, depVersion };
 };
 
+const getDbTemplate = (database: Database, language: string, mjsMode?: string) => {
+  if (language === "typescript") {
+    switch (database) {
+      case "mongodb":
+        return dbMongoTemplateTS;
+      case "postgresql":
+        return dbPgTemplateTS;
+      case "mysql":
+        return dbMysqlTemplateTS;
+      default:
+        return "";
+    }
+  }
+
+  if (mjsMode === "cjs") {
+    switch (database) {
+      case "mongodb":
+        return dbMongoTemplateCJS;
+      case "postgresql":
+        return dbPgTemplateCJS;
+      case "mysql":
+        return dbMysqlTemplateCJS;
+      default:
+        return "";
+    }
+  }
+
+  switch (database) {
+    case "mongodb":
+      return dbMongoTemplateESM;
+    case "postgresql":
+      return dbPgTemplateESM;
+    case "mysql":
+      return dbMysqlTemplateESM;
+    default:
+      return "";
+  }
+};
+
 const createRootFiles = (answers: Answers) => {
-  const { projectName, language, mjsMode, needViews, views, templateType } = answers;
+  const { projectName, language, mjsMode, needViews, views, templateType, database = "mongodb" } = answers;
   const viewInfo = needViews ? getViewEngineInfo(views) : null;
   const isStarter = templateType !== "minimal";
+  const hasDb = database && database !== "none";
 
   const getAppContent = () => {
     let appContent = "";
@@ -154,13 +212,28 @@ const createRootFiles = (answers: Answers) => {
       );
     }
 
+    const pkg = JSON.parse(pkgString);
+    pkg.dependencies = pkg.dependencies || {};
+
+    // Add view engine dependency if needed
     if (needViews && viewInfo) {
-      const pkg = JSON.parse(pkgString);
-      pkg.dependencies = pkg.dependencies || {};
       pkg.dependencies[viewInfo.depName] = viewInfo.depVersion;
-      return JSON.stringify(pkg, null, 2);
     }
-    return pkgString;
+
+    // Add database dependencies
+    if (database === "mongodb") {
+      pkg.dependencies["mongoose"] = "^8.4.0";
+    } else if (database === "postgresql") {
+      pkg.dependencies["pg"] = "^8.12.0";
+      if (language === "typescript") {
+        pkg.devDependencies = pkg.devDependencies || {};
+        pkg.devDependencies["@types/pg"] = "^8.11.6";
+      }
+    } else if (database === "mysql") {
+      pkg.dependencies["mysql2"] = "^3.10.0";
+    }
+
+    return JSON.stringify(pkg, null, 2);
   };
 
   const rootFiles: rootFilesType[] = [
@@ -169,9 +242,15 @@ const createRootFiles = (answers: Answers) => {
       data: () =>
         language === "javascript"
           ? mjsMode === "cjs"
-            ? serverCjsTemplate
-            : serverJsTemplate
-          : serverTsTemplate,
+            ? hasDb
+              ? serverCjsTemplateWithDB
+              : serverCjsTemplate
+            : hasDb
+              ? serverJsTemplateWithDB
+              : serverJsTemplate
+          : hasDb
+            ? serverTsTemplateWithDB
+            : serverTsTemplate,
     },
     {
       file: language === "javascript" ? "app.js" : "app.ts",
@@ -181,8 +260,8 @@ const createRootFiles = (answers: Answers) => {
       file: "package.json",
       data: getPackageJsonContent,
     },
-    { file: ".env", data: () => env },
-    { file: ".env.example", data: () => envExample },
+    { file: ".env", data: () => getEnvTemplate(database) },
+    { file: ".env.example", data: () => getEnvExampleTemplate(database) },
     { file: ".gitignore", data: () => gitignore },
     {
       file: "README.md",
@@ -212,6 +291,17 @@ const createRootFiles = (answers: Answers) => {
       data: () => (language === "typescript" ? tsConfigTemplate : ""),
     },
   ];
+
+  // If database is selected, generate db connection helper
+  if (hasDb) {
+    const dbContent = getDbTemplate(database, language, mjsMode);
+    if (dbContent) {
+      rootFiles.push({
+        file: language === "typescript" ? "src/config/db.ts" : "src/config/db.js",
+        data: () => dbContent,
+      });
+    }
+  }
 
   // If Full Starter template is selected, generate sample modular structure files
   if (isStarter) {

@@ -281,3 +281,39 @@ export const packageJsonTemplateESM: string = `{
   }
 }
 `;
+
+export const serverJsTemplateWithDB: string = `import dotenv from "dotenv";
+import { app } from "./app.js";
+import { connectDB } from "./src/config/db.js";
+
+dotenv.config();
+const PORT = process.env.PORT || 3000;
+
+// ─── Start Server & Connect Database ──────────────────────
+const startServer = async () => {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(\` Server running on http://localhost:\${PORT}\`);
+  });
+};
+
+startServer();
+`;
+
+export const serverCjsTemplateWithDB: string = `const dotenv = require("dotenv");
+const { app } = require("./app");
+const { connectDB } = require("./src/config/db");
+
+dotenv.config();
+const PORT = process.env.PORT || 3000;
+
+// ─── Start Server & Connect Database ──────────────────────
+const startServer = async () => {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(" Server running on http://localhost:" + PORT);
+  });
+};
+
+startServer();
+`;
