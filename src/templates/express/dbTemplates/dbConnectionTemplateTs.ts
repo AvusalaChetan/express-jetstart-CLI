@@ -7,14 +7,14 @@ export const connectDB = async (): Promise<void> => {
   try {
     const dbUrl = process.env.DATABASE_URL;
     if (!dbUrl) {
-      console.warn("⚠️  DATABASE_URL is not defined in environment variables");
+      console.warn("[WARN] DATABASE_URL is not defined in environment variables");
       return;
     }
     await mongoose.connect(dbUrl);
-    console.log(" MongoDB connected successfully");
+    console.log("[DB] MongoDB connected successfully");
   } catch (error) {
-    console.error("⚠️  MongoDB connection failed:", error instanceof Error ? error.message : error);
-    console.warn("💡 Tip: Ensure MongoDB is running locally or check your DATABASE_URL in .env");
+    console.error("[ERROR] MongoDB connection failed:", error instanceof Error ? error.message : error);
+    console.warn("[TIP] Ensure MongoDB is running locally or check your DATABASE_URL in .env");
   }
 };
 `;
@@ -34,15 +34,15 @@ export const connectDB = async (): Promise<void> => {
   try {
     const dbUrl = process.env.DATABASE_URL;
     if (!dbUrl) {
-      console.warn("⚠️  DATABASE_URL is not defined in environment variables");
+      console.warn("[WARN] DATABASE_URL is not defined in environment variables");
       return;
     }
     const client = await pool.connect();
-    console.log(" PostgreSQL connected successfully");
+    console.log("[DB] PostgreSQL connected successfully");
     client.release();
   } catch (error) {
-    console.error("⚠️  PostgreSQL connection failed:", error instanceof Error ? error.message : error);
-    console.warn("💡 Tip: Ensure PostgreSQL is running locally or check your DATABASE_URL in .env");
+    console.error("[ERROR] PostgreSQL connection failed:", error instanceof Error ? error.message : error);
+    console.warn("[TIP] Ensure PostgreSQL is running locally or check your DATABASE_URL in .env");
   }
 };
 `;
@@ -58,16 +58,16 @@ export const connectDB = async (): Promise<void> => {
   try {
     const dbUrl = process.env.DATABASE_URL;
     if (!dbUrl) {
-      console.warn("⚠️  DATABASE_URL is not defined in environment variables");
+      console.warn("[WARN] DATABASE_URL is not defined in environment variables");
       return;
     }
     pool = mysql.createPool(dbUrl);
     const connection = await pool.getConnection();
-    console.log(" MySQL connected successfully");
+    console.log("[DB] MySQL connected successfully");
     connection.release();
   } catch (error) {
-    console.error("⚠️  MySQL connection failed:", error instanceof Error ? error.message : error);
-    console.warn("💡 Tip: Ensure MySQL is running locally or check your DATABASE_URL in .env");
+    console.error("[ERROR] MySQL connection failed:", error instanceof Error ? error.message : error);
+    console.warn("[TIP] Ensure MySQL is running locally or check your DATABASE_URL in .env");
   }
 };
 `;
