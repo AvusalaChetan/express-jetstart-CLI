@@ -13,8 +13,8 @@ export const connectDB = async () => {
     await mongoose.connect(dbUrl);
     console.log("[DB] MongoDB connected successfully");
   } catch (error) {
-    console.error("[ERROR] MongoDB connection failed:", error.message || error);
-    console.warn("[TIP] Ensure MongoDB is running locally or check your DATABASE_URL in .env");
+    console.error("[ERROR] MongoDB connection failed:", error.message || error.code || "Connection refused");
+    console.warn("[TIP] Ensure MongoDB server is running locally or provide a valid DATABASE_URL in .env");
   }
 };
 `;
@@ -34,8 +34,8 @@ const connectDB = async () => {
     await mongoose.connect(dbUrl);
     console.log("[DB] MongoDB connected successfully");
   } catch (error) {
-    console.error("[ERROR] MongoDB connection failed:", error.message || error);
-    console.warn("[TIP] Ensure MongoDB is running locally or check your DATABASE_URL in .env");
+    console.error("[ERROR] MongoDB connection failed:", error.message || error.code || "Connection refused");
+    console.warn("[TIP] Ensure MongoDB server is running locally or provide a valid DATABASE_URL in .env");
   }
 };
 
@@ -64,8 +64,8 @@ export const connectDB = async () => {
     console.log("[DB] PostgreSQL connected successfully");
     client.release();
   } catch (error) {
-    console.error("[ERROR] PostgreSQL connection failed:", error.message || error);
-    console.warn("[TIP] Ensure PostgreSQL is running locally or check your DATABASE_URL in .env");
+    console.error("[ERROR] PostgreSQL connection failed:", error.message || error.code || "Connection refused at port 5432");
+    console.warn("[TIP] Ensure PostgreSQL server is running locally or provide a valid DATABASE_URL in .env");
   }
 };
 `;
@@ -90,8 +90,8 @@ const connectDB = async () => {
     console.log("[DB] PostgreSQL connected successfully");
     client.release();
   } catch (error) {
-    console.error("[ERROR] PostgreSQL connection failed:", error.message || error);
-    console.warn("[TIP] Ensure PostgreSQL is running locally or check your DATABASE_URL in .env");
+    console.error("[ERROR] PostgreSQL connection failed:", error.message || error.code || "Connection refused at port 5432");
+    console.warn("[TIP] Ensure PostgreSQL server is running locally or provide a valid DATABASE_URL in .env");
   }
 };
 
@@ -117,8 +117,8 @@ export const connectDB = async () => {
     console.log("[DB] MySQL connected successfully");
     connection.release();
   } catch (error) {
-    console.error("[ERROR] MySQL connection failed:", error.message || error);
-    console.warn("[TIP] Ensure MySQL is running locally or check your DATABASE_URL in .env");
+    console.error("[ERROR] MySQL connection failed:", error.message || error.code || "Connection refused at port 3306");
+    console.warn("[TIP] Ensure MySQL server is running locally or provide a valid DATABASE_URL in .env");
   }
 };
 `;
@@ -142,8 +142,8 @@ const connectDB = async () => {
     console.log("[DB] MySQL connected successfully");
     connection.release();
   } catch (error) {
-    console.error("[ERROR] MySQL connection failed:", error.message || error);
-    console.warn("[TIP] Ensure MySQL is running locally or check your DATABASE_URL in .env");
+    console.error("[ERROR] MySQL connection failed:", error.message || error.code || "Connection refused at port 3306");
+    console.warn("[TIP] Ensure MySQL server is running locally or provide a valid DATABASE_URL in .env");
   }
 };
 
