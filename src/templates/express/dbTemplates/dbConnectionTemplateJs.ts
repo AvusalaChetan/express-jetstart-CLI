@@ -1,4 +1,7 @@
-export const dbMongoTemplateESM: string = `import mongoose from "mongoose";
+export const dbMongoTemplateESM: string = `import dotenv from "dotenv";
+import mongoose from "mongoose";
+
+dotenv.config();
 
 export const connectDB = async () => {
   try {
@@ -10,13 +13,16 @@ export const connectDB = async () => {
     await mongoose.connect(dbUrl);
     console.log(" MongoDB connected successfully");
   } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
-    process.exit(1);
+    console.error("⚠️  MongoDB connection failed:", error.message || error);
+    console.warn("💡 Tip: Ensure MongoDB is running locally or check your DATABASE_URL in .env");
   }
 };
 `;
 
-export const dbMongoTemplateCJS: string = `const mongoose = require("mongoose");
+export const dbMongoTemplateCJS: string = `const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+
+dotenv.config();
 
 const connectDB = async () => {
   try {
@@ -28,20 +34,23 @@ const connectDB = async () => {
     await mongoose.connect(dbUrl);
     console.log(" MongoDB connected successfully");
   } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
-    process.exit(1);
+    console.error("⚠️  MongoDB connection failed:", error.message || error);
+    console.warn("💡 Tip: Ensure MongoDB is running locally or check your DATABASE_URL in .env");
   }
 };
 
 module.exports = { connectDB };
 `;
 
-export const dbPgTemplateESM: string = `import pg from "pg";
+export const dbPgTemplateESM: string = `import dotenv from "dotenv";
+import pg from "pg";
+
+dotenv.config();
 
 const { Pool } = pg;
 
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL || "postgresql://postgres:password@localhost:5432/my_database",
 });
 
 export const connectDB = async () => {
@@ -55,16 +64,19 @@ export const connectDB = async () => {
     console.log(" PostgreSQL connected successfully");
     client.release();
   } catch (error) {
-    console.error("❌ PostgreSQL connection error:", error);
-    process.exit(1);
+    console.error("⚠️  PostgreSQL connection failed:", error.message || error);
+    console.warn("💡 Tip: Ensure PostgreSQL is running locally or check your DATABASE_URL in .env");
   }
 };
 `;
 
-export const dbPgTemplateCJS: string = `const { Pool } = require("pg");
+export const dbPgTemplateCJS: string = `const dotenv = require("dotenv");
+const { Pool } = require("pg");
+
+dotenv.config();
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL || "postgresql://postgres:password@localhost:5432/my_database",
 });
 
 const connectDB = async () => {
@@ -78,15 +90,18 @@ const connectDB = async () => {
     console.log(" PostgreSQL connected successfully");
     client.release();
   } catch (error) {
-    console.error("❌ PostgreSQL connection error:", error);
-    process.exit(1);
+    console.error("⚠️  PostgreSQL connection failed:", error.message || error);
+    console.warn("💡 Tip: Ensure PostgreSQL is running locally or check your DATABASE_URL in .env");
   }
 };
 
 module.exports = { pool, connectDB };
 `;
 
-export const dbMysqlTemplateESM: string = `import mysql from "mysql2/promise";
+export const dbMysqlTemplateESM: string = `import dotenv from "dotenv";
+import mysql from "mysql2/promise";
+
+dotenv.config();
 
 export let pool;
 
@@ -102,13 +117,16 @@ export const connectDB = async () => {
     console.log(" MySQL connected successfully");
     connection.release();
   } catch (error) {
-    console.error("❌ MySQL connection error:", error);
-    process.exit(1);
+    console.error("⚠️  MySQL connection failed:", error.message || error);
+    console.warn("💡 Tip: Ensure MySQL is running locally or check your DATABASE_URL in .env");
   }
 };
 `;
 
-export const dbMysqlTemplateCJS: string = `const mysql = require("mysql2/promise");
+export const dbMysqlTemplateCJS: string = `const dotenv = require("dotenv");
+const mysql = require("mysql2/promise");
+
+dotenv.config();
 
 let pool;
 
@@ -124,8 +142,8 @@ const connectDB = async () => {
     console.log(" MySQL connected successfully");
     connection.release();
   } catch (error) {
-    console.error("❌ MySQL connection error:", error);
-    process.exit(1);
+    console.error("⚠️  MySQL connection failed:", error.message || error);
+    console.warn("💡 Tip: Ensure MySQL is running locally or check your DATABASE_URL in .env");
   }
 };
 

@@ -1,4 +1,7 @@
-export const dbMongoTemplateTS: string = `import mongoose from "mongoose";
+export const dbMongoTemplateTS: string = `import dotenv from "dotenv";
+import mongoose from "mongoose";
+
+dotenv.config();
 
 export const connectDB = async (): Promise<void> => {
   try {
@@ -10,18 +13,21 @@ export const connectDB = async (): Promise<void> => {
     await mongoose.connect(dbUrl);
     console.log(" MongoDB connected successfully");
   } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
-    process.exit(1);
+    console.error("⚠️  MongoDB connection failed:", error instanceof Error ? error.message : error);
+    console.warn("💡 Tip: Ensure MongoDB is running locally or check your DATABASE_URL in .env");
   }
 };
 `;
 
-export const dbPgTemplateTS: string = `import pg from "pg";
+export const dbPgTemplateTS: string = `import dotenv from "dotenv";
+import pg from "pg";
+
+dotenv.config();
 
 const { Pool } = pg;
 
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL || "postgresql://postgres:password@localhost:5432/my_database",
 });
 
 export const connectDB = async (): Promise<void> => {
@@ -35,13 +41,16 @@ export const connectDB = async (): Promise<void> => {
     console.log(" PostgreSQL connected successfully");
     client.release();
   } catch (error) {
-    console.error("❌ PostgreSQL connection error:", error);
-    process.exit(1);
+    console.error("⚠️  PostgreSQL connection failed:", error instanceof Error ? error.message : error);
+    console.warn("💡 Tip: Ensure PostgreSQL is running locally or check your DATABASE_URL in .env");
   }
 };
 `;
 
-export const dbMysqlTemplateTS: string = `import mysql from "mysql2/promise";
+export const dbMysqlTemplateTS: string = `import dotenv from "dotenv";
+import mysql from "mysql2/promise";
+
+dotenv.config();
 
 export let pool: mysql.Pool;
 
@@ -57,8 +66,8 @@ export const connectDB = async (): Promise<void> => {
     console.log(" MySQL connected successfully");
     connection.release();
   } catch (error) {
-    console.error("❌ MySQL connection error:", error);
-    process.exit(1);
+    console.error("⚠️  MySQL connection failed:", error instanceof Error ? error.message : error);
+    console.warn("💡 Tip: Ensure MySQL is running locally or check your DATABASE_URL in .env");
   }
 };
 `;
