@@ -137,9 +137,9 @@ export const packageJsonTemplateTS: string = `{
   "type": "module",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "concurrently \\\"tsc -w\\\" \\\"nodemon dist/server.js\\\"",
-    "build": "tsc"
+   "start": "node dist/server.js",
+   "dev": "tsx watch server.ts",
+   "build": "tsc"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -148,6 +148,8 @@ export const packageJsonTemplateTS: string = `{
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.4.5",
     "@types/node": "^20.14.9",
     "concurrently": "^8.2.2",
     "typescript": "^5.4.5",

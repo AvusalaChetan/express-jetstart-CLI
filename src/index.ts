@@ -6,11 +6,12 @@ import {showNextSteps} from "./shared/nextSteps.js";
 import {showError} from "./ui/error/showError.js";
 import {BuildUi, successCelebration} from "./ui/uiCli.js";
 import sleep from "./utils/sleep.js";
+import {runNpmInstall} from "./shared/runNpmInstall.js";
 
 const main = async () => {
   try {
-     console.clear();
-    console.log('\n')
+    console.clear();
+    console.log("\n");
     await BuildUi();
     const answers = await askQuestions();
 
@@ -18,7 +19,13 @@ const main = async () => {
     console.log("\n");
     await createProject(answers);
     await successCelebration();
-    showNextSteps(answers.projectName);
+
+    if (answers.runNpmInstall) {
+      runNpmInstall(answers.projectName);
+    } else {
+      showNextSteps(answers.projectName);
+    }
+    
   } catch (error) {
     showError(
       `Something went wrong: ${error instanceof Error ? error.message : "Unknown error"}`,

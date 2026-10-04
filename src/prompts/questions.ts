@@ -17,6 +17,7 @@ export interface Answers {
   mjsMode?: "esm" | "cjs";
   cors?: boolean;
   envConfig?: boolean;
+  runNpmInstall: boolean;
 }
 
 const askQuestions = async (): Promise<Answers> => {
@@ -46,7 +47,7 @@ const askQuestions = async (): Promise<Answers> => {
           name: `${emoji.get("star")}  TypeScript  ${chalk.gray("(recommended)")}`,
           value: "typescript",
         },
-        { name: `${emoji.get("zap")}  JavaScript`, value: "javascript" },
+        {name: `${emoji.get("zap")}  JavaScript`, value: "javascript"},
       ],
       pageSize: 6,
     },
@@ -75,10 +76,7 @@ const askQuestions = async (): Promise<Answers> => {
     {
       type: "rawlist",
       name: "database",
-      message: gradient(
-        "#00F260",
-        "#0575E6",
-      )(`🗄️  Choose your database:`),
+      message: gradient("#00F260", "#0575E6")(`🗄️  Choose your database:`),
       choices: [
         {
           name: `${emoji.get("leaf")}  MongoDB  ${chalk.gray("(Mongoose)")}`,
@@ -104,10 +102,7 @@ const askQuestions = async (): Promise<Answers> => {
     {
       type: "rawlist",
       name: "templateType",
-      message: gradient(
-        "#FF512F",
-        "#DD2476",
-      )(`📁  Select template structure:`),
+      message: gradient("#FF512F", "#DD2476")(`📁  Select template structure:`),
       choices: [
         {
           name: `${emoji.get("sparkles")}  Full Starter  ${chalk.gray("(recommended: health routes, controller, middleware & utils)")}`,
@@ -163,6 +158,16 @@ const askQuestions = async (): Promise<Answers> => {
       )(`📦  Initialize a git repository?`),
       default: true,
     },
+    {
+      type: "confirm",
+      name: "runNpmInstall",
+      message: gradient(
+        "#ff4ecd",
+        "#00d2ff",
+        "#ffb347",
+      )(`${emoji.get("package")}  Start with npm?`),
+      default: true,
+    },
   ];
 
   const results = await inquirer.prompt(questions);
@@ -179,6 +184,7 @@ const askQuestions = async (): Promise<Answers> => {
     mjsMode: results.mjsMode,
     cors: results.cors,
     envConfig: results.envConfig,
+    runNpmInstall: results.runNpmInstall,
   };
 };
 
