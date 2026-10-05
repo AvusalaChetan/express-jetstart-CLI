@@ -31,6 +31,7 @@ Use `@latest` if npm is using a cached version.
 - Generate `.env` and `.env.example` files
 - Include database connection helpers
 - Start with a clean, scalable project structure
+- Automatically install dependencies and start the project (optional)
 
 ## Generated Project Structure
 
