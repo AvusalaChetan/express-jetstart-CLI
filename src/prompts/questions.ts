@@ -41,7 +41,10 @@ const askQuestions = async (): Promise<Answers> => {
     {
       type: "rawlist",
       name: "language",
-      message: gradient("#DA22FF", "#9733EE")(`💻  Choose your language:`),
+      message: gradient(
+        "#DA22FF",
+        "#9733EE",
+      )(`${emoji.get("computer")}  Choose your language:`),
       choices: [
         {
           name: `${emoji.get("star")}  TypeScript  ${chalk.gray("(recommended)")}`,
@@ -76,10 +79,13 @@ const askQuestions = async (): Promise<Answers> => {
     {
       type: "rawlist",
       name: "database",
-      message: gradient("#00F260", "#0575E6")(`🗄️  Choose your database:`),
+      message: gradient(
+        "#00F260",
+        "#0575E6",
+      )(`${emoji.get("file_cabinet")}  Choose your database:`),
       choices: [
         {
-          name: `${emoji.get("leaf")}  MongoDB  ${chalk.gray("(Mongoose)")}`,
+          name: `${emoji.get("leaves")}  MongoDB  ${chalk.gray("(Mongoose)")}`,
           value: "mongodb",
         },
         {
@@ -102,7 +108,10 @@ const askQuestions = async (): Promise<Answers> => {
     {
       type: "rawlist",
       name: "templateType",
-      message: gradient("#FF512F", "#DD2476")(`📁  Select template structure:`),
+      message: gradient(
+        "#FF512F",
+        "#DD2476",
+      )(`${emoji.get("file_folder")}  Select template structure:`),
       choices: [
         {
           name: `${emoji.get("sparkles")}  Full Starter  ${chalk.gray("(recommended: health routes, controller, middleware & utils)")}`,
@@ -123,14 +132,17 @@ const askQuestions = async (): Promise<Answers> => {
       message: gradient(
         "#56ab2f",
         "#a8e063",
-      )(`🎨  Do you want to use a view engine?`),
+      )(`${emoji.get("art")}  Do you want to use a view engine?`),
       default: true,
     },
 
     {
       type: "rawlist",
       name: "views",
-      message: gradient("#f7971e", "#ffd200")(`🖌️  Choose your view engine:`),
+      message: gradient(
+        "#f7971e",
+        "#ffd200",
+      )(`${emoji.get("paintbrush")}  Choose your view engine:`),
       choices: [
         {
           name: `${emoji.get("gem")}  EJS  ${chalk.gray("(simple & flexible)")}`,
@@ -155,17 +167,18 @@ const askQuestions = async (): Promise<Answers> => {
       message: gradient(
         "#00c6ff",
         "#0072ff",
-      )(`📦  Initialize a git repository?`),
+      )(`${emoji.get("package")}  Initialize a git repository?`),
       default: true,
     },
     {
       type: "confirm",
       name: "runNpmInstall",
       message: gradient(
-        "#ff4ecd",
-        "#00d2ff",
-        "#ffb347",
-      )(`${emoji.get("package")}  Start with npm?`),
+        "#ffd93d",
+        "#fff200",
+        "#c4f542",
+        "#43e97b",
+      )(`${emoji.get("wrench")} Install with "npm" and start now?`),
       default: true,
     },
   ];
